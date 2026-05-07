@@ -1,0 +1,25 @@
+@use "../styles/styles-colors" as *;
+
+body {
+    background-color: #FFF;
+ 
+}
+
+#header {
+    background-color: $background-color !important;
+    color: #fff;
+
+    .title {
+        color: #9be5b3;
+    }
+}
+
+#footer {
+    background-color: $background-color;
+    color: #FFF;
+    padding: 0.5rem;
+
+    .title {
+        color: #000; // #cae2d1
+    }
+}
