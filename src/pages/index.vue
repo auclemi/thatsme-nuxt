@@ -1,10 +1,8 @@
 <script setup>
-definePageMeta({
-  layout: 'default',
-  title: "That's Me !"
-})
+const title = usePageTitle("Home")
 </script>
 
 <template>
+  <h1>{{ title }}</h1>
   <Home />
 </template>
