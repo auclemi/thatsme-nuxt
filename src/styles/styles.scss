@@ -21,7 +21,7 @@ nav a:hover {
 }
 
 // highlight current page in header and footer
-a[aria-current="page"] {
+a[aria-current="page"]:not(.navbar-image) {
       font-weight: 700;
       border-bottom: solid  3px #9BE5B3;
       padding-bottom: 0;

@@ -4,20 +4,23 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --port 3100",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "nuxt": "^4.4.4",
+    "bootstrap": "^5.3.8",
     "vue": "^3.5.33",
     "vue-router": "^5.0.6"
+    
   },
-    "devDependencies": {
-    "nuxt": "^3.13.0",
+  "devDependencies": {
+    "nuxi": "^3.35.1",
+    "nuxt": "^4.4.4",
     "sass": "^1.77.0",
     "sass-loader": "^16.0.0",
     "typescript": "^5.4.0"
   }
+  
 }

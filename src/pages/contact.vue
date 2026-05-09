@@ -1,8 +1,8 @@
 <script setup>
-const title = usePageTitle("Home")
+const title = usePageTitle("Contact")
 </script>
 
 <template>
   <h1>{{ title }}</h1>
-  <Home />
+  <ContactForm />
 </template>

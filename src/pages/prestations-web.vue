@@ -1,14 +1,8 @@
 <script setup>
-definePageMeta({
-  layout: 'default',
-  title: 'Contact'
-})
+const title = usePageTitle("Prestations web")
 </script>
 
 <template>
-  <h1>
-    <span aria-hidden="true">🎯</span>
-    Prestations web
-  </h1>
-  <ContactForm />
+  <h1>{{ title }}</h1>
+  <PrestationsWeb />
 </template>

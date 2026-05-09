@@ -156,5 +156,5 @@ async function submitForm(e: Event) {
 </template>
 
 <style scoped>
-@import "~/components/contact/contact.scss";
+/* @import "~/components/contact/contact.scss"; */
 </style>
