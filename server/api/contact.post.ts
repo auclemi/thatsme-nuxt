@@ -1,6 +1,6 @@
-import { readBody, createError, sendError } from 'h3'
+import { defineEventHandler, readBody, createError, sendError } from 'h3'
 
-export default async (event) => {
+export default defineEventHandler(async (event) => {
   const body = await readBody<{
     name?: string
     email?: string
@@ -32,4 +32,5 @@ export default async (event) => {
   console.log('Message contact reçu :', body)
 
   return { ok: true }
-}
+
+})
