@@ -1,7 +1,7 @@
 <script setup>
 definePageMeta({
   layout: 'default',
-  title: 'Contact'
+  title: 'Stats'
 })
 </script>
 
@@ -10,5 +10,5 @@ definePageMeta({
     <span aria-hidden="true">🎯</span>
     stats
   </h1>
-  <ContactForm />
+  <statsComponent />
 </template>

@@ -1,7 +1,15 @@
+import { defineNuxtConfig } from 'nuxt/config'
 export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      apiUrl: process.env.NUXT_PUBLIC_API_URL
+    }
+  },
   srcDir: 'src/',
   ssr: true,
-
+  devServer: {
+    port: 3100
+  },
   dir: {
     public: 'src/public'
   },

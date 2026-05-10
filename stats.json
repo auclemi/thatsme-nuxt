@@ -1,0 +1,42 @@
+[
+  {
+    "path": "/home",
+    "uid": "cc1325bf-f580-40da-8ff8-4cb0fbe7bac5",
+    "ts": 1778420140886
+  },
+  {
+    "path": "/prestations-web",
+    "uid": "cc1325bf-f580-40da-8ff8-4cb0fbe7bac5",
+    "ts": 1778420164315
+  },
+  {
+    "path": "/home",
+    "uid": "cc1325bf-f580-40da-8ff8-4cb0fbe7bac5",
+    "ts": 1778420196082
+  },
+  {
+    "path": "/contact",
+    "uid": "auclemi-nuxt-dev",
+    "ts": 1778420204011
+  },
+  {
+    "path": "/prestations-web",
+    "uid": "auclemi-nuxt-dev",
+    "ts": 1778420204786
+  },
+  {
+    "path": "/",
+    "uid": "auclemi-nuxt-dev",
+    "ts": 1778423566010
+  },
+  {
+    "path": "/",
+    "uid": "auclemi-nuxt-dev",
+    "ts": 1778424499136
+  },
+  {
+    "path": "/contact",
+    "uid": "auclemi-nuxt-dev",
+    "ts": 1778424502038
+  }
+]

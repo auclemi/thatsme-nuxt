@@ -1,0 +1,60 @@
+<script setup lang="ts">
+import { ref, onMounted } from "vue";
+console.log('import.meta.env =', import.meta.env)
+
+// const apiUrl = `${import.meta.env.NUXT_PUBLIC_API_URL}/stats`;
+const config = useRuntimeConfig()
+const apiUrl = `${config.public.apiUrl}/stats`
+
+type StatEntry = {
+  ts: number;
+  path: string;
+  uid: string;
+};
+
+const stats = ref<StatEntry[]>([]);
+
+const loading = ref(true);
+const error = ref(false);
+
+function formatDate(ts: number) {
+  return new Date(ts).toLocaleString("fr-FR");
+}
+
+onMounted(async () => {
+  try {
+    const res = await fetch(apiUrl);
+    if (!res.ok) throw new Error();
+    stats.value = await res.json();
+  } catch (e) {
+    error.value = true;
+  } finally {
+    loading.value = false;
+  }
+});
+</script>
+
+<template>
+  <h1>Statistiques</h1>
+
+  <div v-if="loading">Chargement…</div>
+  <div v-else-if="error">Erreur lors du chargement des stats.</div>
+
+  <table v-else class="table table-striped">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Page</th>
+        <th>Visiteur</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr v-for="s in stats" :key="s.ts + s.uid">
+        <td>{{ formatDate(s.ts) }}</td>
+        <td>{{ s.path }}</td>
+        <td>{{ s.uid }}</td>
+      </tr>
+    </tbody>
+  </table>
+</template>
