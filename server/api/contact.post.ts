@@ -19,14 +19,11 @@ export default defineEventHandler(async (event) => {
     errors.message = 'Veuillez écrire un message.'
 
   if (Object.keys(errors).length > 0) {
-    return sendError(
-      event,
-      createError({
-        statusCode: 400,
-        statusMessage: 'Validation error',
-        data: { errors }
-      })
-    )
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'Validation error',
+      data: { errors }
+    })
   }
 
   console.log('Message contact reçu :', body)

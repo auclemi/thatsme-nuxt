@@ -2,7 +2,7 @@ import { defineNuxtConfig } from 'nuxt/config'
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
-      apiUrl: process.env.NUXT_PUBLIC_API_URL
+      apiUrl: process.env.NUXT_PUBLIC_API_URL || '/api'
     }
   },
   srcDir: 'src/',
@@ -16,7 +16,6 @@ export default defineNuxtConfig({
 
   app: {
     baseURL: '/',
-    buildAssetsDir: '/assets/'
   },
 
   css: [

@@ -1,5 +1,5 @@
 (function () {
-  console.log("📊 stats.js chargé !");
+  // console.log("📊 stats.js chargé !");
 
   // UID unique par visiteur
   let uid = localStorage.getItem("uid");
@@ -9,10 +9,10 @@
   }
 
   // Détecter l'URL de l'API (Nuxt runtimeConfig)
-  const apiUrl = window.__NUXT__?.config?.public?.apiUrl;
+  const apiUrl = window.__NUXT__?.config?.public?.apiUrl || '/api';
+  
   if (!apiUrl) {
     console.warn("⚠️ apiUrl introuvable dans runtimeConfig");
-    return;
   }
 
   function sendStats() {
@@ -22,7 +22,7 @@
       ts: Date.now()
     };
 
-    console.log("📤 Envoi stats :", payload);
+    // console.log("📤 Envoi stats :", payload);
 
     fetch(`${apiUrl}/stats`, {
       method: "POST",

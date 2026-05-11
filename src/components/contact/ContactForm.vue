@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import ErrorComponent from '~/components/error/ErrorComponent.vue'
 import { ref, computed } from 'vue'
 
 const name = ref('')
@@ -37,7 +36,7 @@ async function submitForm(e: Event) {
   serverError.value = null
 
   try {
-    await $fetch('/api/contact', {
+    await $fetch('/api/contactAAAA', {
       method: 'POST',
       body: {
         name: name.value,
@@ -61,7 +60,7 @@ async function submitForm(e: Event) {
 </script>
 
 <template>
-  <ErrorComponent
+  <Error
     v-if="serverError"
     errorMessage="Une erreur est survenue."
     instruction="Veuillez réessayer dans quelques minutes."
@@ -70,7 +69,7 @@ async function submitForm(e: Event) {
   <div class="alert alert-success" v-if="success">
     <div>Votre message a bien été envoyé.</div>
     <div>Je vous réponds généralement sous 24 à 48h en semaine.</div>
-    <div><NuxtLink to="/home">Retour à l'accueil.</NuxtLink></div>
+    <div><NuxtLink to="/">Retour à l'accueil.</NuxtLink></div>
   </div>
 
   <div
@@ -126,7 +125,7 @@ async function submitForm(e: Event) {
         </div>
 
         <div
-          class="alert alert-warning mt-3 visually-hidden"
+          class="alert alert-warning mt-3"
           role="alert"
           aria-live="assertive"
           v-if="submitted && !isValid"
