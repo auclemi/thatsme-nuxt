@@ -26,7 +26,7 @@ const isCurrent = (path) => (route.path === path ? "page" : undefined)
 
           <!-- Logo -->
           <div aria-hidden="true">
-            <NuxtLink to="/home" class="navbar-image">
+            <NuxtLink to="/" class="navbar-image">
               <img
                 src="/images/thatsME.png"
                 alt="That's Me Logo"
@@ -50,8 +50,8 @@ const isCurrent = (path) => (route.path === path ? "page" : undefined)
               <li class="nav-item">
                 <NuxtLink
                   class="nav-link text-white"
-                  to="/home"
-                  :aria-current="isCurrent('/home')"
+                  to="/"
+                  :aria-current="isCurrent('/')"
                 >
                   Accueil
                 </NuxtLink>
