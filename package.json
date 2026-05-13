@@ -6,8 +6,7 @@
     "build": "nuxt build",
     "dev": "nuxt dev --port 3100",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "preview": "nuxt preview"
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
@@ -19,10 +18,13 @@
   "devDependencies": {
     "@types/node": "^25.6.2",
     "cross-env": "^10.1.0",
-    "nuxi": "^3.35.1",
-    "nuxt": "^4.4.4",
+    "nuxi": "latest",
+    "nuxt": "4.3.0",
     "sass": "^1.77.0",
     "sass-loader": "^16.0.0",
     "typescript": "^5.4.0"
+  },
+  "overrides": {
+    "rollup-plugin-visualizer": "6.0.0"
   }
 }
