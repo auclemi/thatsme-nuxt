@@ -1,10 +1,8 @@
 import { defineEventHandler, readBody, createError } from 'h3'
 import nodemailer from 'nodemailer'
-import { useRuntimeConfig } from 'nuxt/app'
 
 export default defineEventHandler(async (event) => {
   console.log("SMTP_HOST =", process.env.SMTP_HOST)
-  console.log("CONFIG =", useRuntimeConfig())
   const body = await readBody<{
     name?: string
     email?: string
