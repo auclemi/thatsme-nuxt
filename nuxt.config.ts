@@ -10,12 +10,12 @@ export default defineNuxtConfig({
   devServer: {
     port: 3100
   },
-  dir: {
-    public: 'src/public'
-  },
-
   app: {
     baseURL: '/',
+  },
+
+  experimental: {
+    viewTransition: true
   },
 
   css: [

@@ -19,11 +19,14 @@ const isCurrent = (path) => (route.path === path ? "page" : undefined)
     class="col-12 col-md-6 d-flex flex-wrap justify-content-md-end text-break gx-3"
     style="min-width:0;"
   >
-    <div class="title">That's Me ! Développement web & accessibilité</div>
+    <div class="title">
+      That's Me !
+      | <small>Nuxt V1.0</small>
+    </div>
   </div>
 
   <div
-    class="col-12 col-md-6 d-flex justify-content-md-start gx-3"
+    class="col-12 col-md-4 d-flex justify-content-md-start gx-3"
     style="min-width:0;"
   >
     <nav>

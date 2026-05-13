@@ -3,10 +3,12 @@ import path from 'path'
 
 const filePath = path.join(process.cwd(), 'stats.json')
 
-export async function getAllStats() {
+export async function getAllStats(reverse = true) {
   try {
     const raw = await fs.readFile(filePath, 'utf-8')
-    return JSON.parse(raw)
+    const stats = JSON.parse(raw)
+    if (!Array.isArray(stats)) return []
+    return reverse ? stats.reverse() : stats
   } catch {
     return []
   }
