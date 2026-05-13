@@ -4,6 +4,7 @@ const title = usePageTitle("Prestations web")
 
 <template>
   <div id="prestations-web">
+    <h1>{{ title }}</h1>
 
     <div class="cards-container">
       <section>

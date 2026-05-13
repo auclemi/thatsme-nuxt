@@ -87,7 +87,15 @@ section {
   flex: 0 0 500px;
 }
 
+.form-control {
+  border-color: #b5b5b5;
+  transition: border-color .2s, box-shadow .2s;
+}
 
+.form-control:focus {
+  border-color: #D1E7DD !important;
+  box-shadow: 0 0 0 0.2rem #D1E7DD !important;
+}
 
 /* Page Transition Animations */
 

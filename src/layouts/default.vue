@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const route = useRoute()
 
 // Define the order of your pages here
@@ -12,8 +12,8 @@ const pages = [
 const currentIndex = computed(() => pages.findIndex(p => p.path === route.path))
 
 const prevPage = computed(() => currentIndex.value > 0 ? pages[currentIndex.value - 1] : null)
-const nextPage = computed(() => (currentIndex.value >= 0 && currentIndex.value < pages.length - 1) 
-  ? pages[currentIndex.value + 1] 
+const nextPage = computed(() => (currentIndex.value >= 0 && currentIndex.value < pages.length - 1)
+  ? pages[currentIndex.value + 1]
   : null
 )
 
@@ -30,13 +30,31 @@ useHead({
     { name: 'viewport', content: 'width=device-width' }
   ]
 })
+
+
+function backToTop() {
+  const scrollHandler = () => {
+    const el = document.getElementById('main-content');
+    // preventScroll ensures the focus doesn't trigger a browser-default scroll animation
+    el?.focus({ preventScroll: true });
+    // behavior: 'instant' ensures we jump to top without the sliding motion you dislike
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  };
+
+  // Use the View Transition API to provide the fade effect defined in your SCSS
+  if (document.startViewTransition) {
+    document.startViewTransition(scrollHandler);
+  } else {
+    scrollHandler();
+  }
+}
 </script>
 
 <template>
   <div class="d-flex flex-column min-vh-100">
     <Header />
 
-    <main id="main-content" class="container flex-grow-1 mt-4" tabindex="-1">
+    <main id="main-content" name="main-content" class="container flex-grow-1 mt-4" tabindex="-1">
       <NuxtPage />
 
       <!-- Navigation Links -->
@@ -52,6 +70,13 @@ useHead({
           </NuxtLink>
         </div>
       </nav>
+      <!-- At the bottom of your main content section -->
+      <div class="text-end mt-3">
+        <a href="#main-content" @click.prevent="backToTop" class="btn btn-link link-success">
+          Haut de la page
+        </a>
+      </div>
+
     </main>
 
     <Footer />

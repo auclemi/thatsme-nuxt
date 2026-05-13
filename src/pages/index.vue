@@ -33,11 +33,10 @@ const title = usePageTitle("Accueil")
     </ul>
     <div class="d-flex align-items-center gap-2 mt-4">
       <div>
-        <img :src="'/images/Michel_auclert-contact.png'" alt="Contact" />
-
+        <img src="/images/Michel_auclert-contact.png" alt="Portrait de Michel Auclert" width="150" height="150" />
       </div>
       <div>
-        <a href="/contact">Contactez-moi pour discuter de votre projet. </a>
+        <NuxtLink to="/contact">Contactez-moi pour discuter de votre projet.</NuxtLink>
       </div>
     </div>
   </div>

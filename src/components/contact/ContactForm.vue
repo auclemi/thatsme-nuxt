@@ -36,7 +36,7 @@ async function submitForm(e: Event) {
   serverError.value = null
 
   try {
-    await $fetch('/api/contactAAAA', {
+    await $fetch('/api/contact', {
       method: 'POST',
       body: {
         name: name.value,
