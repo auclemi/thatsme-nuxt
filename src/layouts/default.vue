@@ -19,7 +19,7 @@ const nextPage = computed(() => (currentIndex.value >= 0 && currentIndex.value <
 
 useHead({
   link: [
-    { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+    // { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
     { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
   ],
   script: [
