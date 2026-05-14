@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import { useRuntimeConfig } from "nuxt/app";
 import { ref, onMounted } from "vue";
-console.log('import.meta.env =',
-    import.meta.env)
+console.log('import.meta.env =', import.meta.env)
 
 // const apiUrl = `${import.meta.env.NUXT_PUBLIC_API_URL}/stats`;
-// const config = useRuntimeConfig()
-const apiUrl = `${import.meta.env.NUXT_PUBLIC_API_URL}/stats`
+const config = useRuntimeConfig();
+const apiUrl = `${config.public.apiUrl}/stats`
+
+// const apiUrl = `${import.meta.env.NUXT_PUBLIC_API_URL}/stats`
 
 type StatEntry = {
     ts: number;

@@ -1,46 +1,59 @@
-# ===============================
-#   BUILD & DEPLOY — THAT'S ME NUXT
-# ===============================
+# Script de déploiement pour application Nuxt.js
+# Ce script automatise l'installation, le build et le démarrage (ou la mise à jour) de l'application.
 
-Write-Host "=== BUILD BACKEND (BE) ==="
-Write-Host "PM2 STOP..."
-pm2 delete all
-pm2 kill
+$ErrorActionPreference = "Stop"
 
-# Dossiers DEV et PROD
-$devPath  = "C:\Users\AUCLERMI\projects\thatsme-nuxt"
-$prodPath = "C:\Users\AUCLERMI\projects\thatsme-nuxt-prod"
+# --- Configuration ---
+$AppName = "thatsme-nuxt"
+$BuildFolder = "..C:\Users\AUCLERMI\projects\thatsme-nuxt-prod\.output"
+$LogFile = "deploy_log.txt"
 
-Write-Host "DEV folder  : $devPath"
-Write-Host "PROD folder: $prodPath"
-
-# 1) Nettoyage du dossier PROD
-Write-Host "PROD clean-up..."
-if (Test-Path $prodPath\) {
-    Remove-Item $prodPath\ -Recurse -Force
+function Write-Log {
+    param([string]$Message)
+    $TimeStamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    $FullMessage = "[$TimeStamp] $Message"
+    Write-Host $FullMessage -ForegroundColor Cyan
+    Add-Content -Path $LogFile -Value $FullMessage
 }
 
-#New-Item -ItemType Directory -Path $prodPath | Out-Null
+try {
+    Write-Log "Début du déploiement de $AppName..."
 
-# 2) Copie des fichiers DEV → PROD
-Write-Host "Copy backend to PROD..."
-Copy-Item "$devPath\package.json"        "$prodPath\package.json"
-Copy-Item "$devPath\package-lock.json"   "$prodPath\package-lock.json"
-Copy-Item "$devPath\.env.production" "$prodPath\.env" -Force
-Copy-Item "$devPath\public" "$prodPath\public" -Recurse -Force
-Copy-Item "$devPath\server" "$prodPath\server" -Recurse -Force
-Copy-Item "$devPath\src" "$prodPath\src" -Recurse -Force
+    # 1. Vérification de Node.js
+    if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
+        throw "Node.js n'est pas installé sur cette machine."
+    }
 
+    # 2. Nettoyage des anciens builds (optionnel)
+    if (Test-Path $BuildFolder) {
+        Write-Log "Nettoyage de l'ancien dossier de build..."
+        Remove-Item -Recurse -Force $BuildFolder
+    }
 
-# 3) Installation des dépendances en PROD
-Set-Location $prodPath
-npm install
-$env:NODE_ENV="production"
-npm run build
+    # 3. Installation des dépendances
+    Write-Log "Installation des dépendances (npm install)..."
+    npm install
 
+    # 4. Build de l'application
+    Write-Log "Génération du build (npm run build)..."
+    npm run build
 
-# 4) PM2 : relancer proprement
-pm2 start .output\server\index.mjs --name thatsme-nuxt
-pm2 save
-# Retour au dossier initial
-Set-Location $devPath
+    # 5. Gestion du processus (Exemple avec PM2 si installé, sinon démarrage simple)
+    if (Get-Command pm2 -ErrorAction SilentlyContinue) {
+        Write-Log "Redémarrage de l'application avec PM2..."
+        pm2 delete $AppName 2>$null
+        pm2 start .output/server/index.mjs --name $AppName
+        pm2 save
+    } else {
+        Write-Log "PM2 non trouvé. Lancement manuel via Node..."
+        Write-Log "NOTE: Pour une production stable, il est recommandé d'utiliser PM2 ou un service Windows."
+        # Note: Ceci est bloquant. Pour un script de CI/CD, utilisez un gestionnaire de processus.
+        node .output/server/index.mjs
+    }
+
+    Write-Log "Déploiement terminé avec succès."
+}
+catch {
+    Write-Log "ERREUR : $($_.Exception.Message)"
+    exit 1
+}
