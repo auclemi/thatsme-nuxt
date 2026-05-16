@@ -23,7 +23,7 @@ const title = usePageTitle("Accueil")
     </div>
 
     <div class="mt-3">
-      <a href="/prestations-web">Prestations Web</a>
+      <NuxtLink to="/prestations-web" class="navbar-image">Prestations Web</NuxtLink>
     </div>
     <ul class="list-ok">
       <li>Développement front-end sur mesure</li>

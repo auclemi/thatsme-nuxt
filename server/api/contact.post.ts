@@ -43,7 +43,7 @@ export default defineEventHandler(async (event) => {
 
   // --- ENVOI DU MAIL ---
   const info = await transporter.sendMail({
-    from: process.env.CONTACT_FROM,
+    from: `That's Me ! <${process.env.CONTACT_FROM}>`,
     to: process.env.CONTACT_TO,
     subject: `📬 Nouveau message de ${body.name} (${process.env.ENVIRONMENT})`,
     replyTo: body.email,
