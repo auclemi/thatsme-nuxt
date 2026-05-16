@@ -1,4 +1,6 @@
 <script setup lang="ts">
+
+
 const route = useRoute()
 
 // Define the order of your pages here
@@ -16,7 +18,6 @@ const nextPage = computed(() => (currentIndex.value >= 0 && currentIndex.value <
   ? pages[currentIndex.value + 1]
   : null
 )
-
 useHead({
   link: [
     // { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
@@ -30,7 +31,6 @@ useHead({
     { name: 'viewport', content: 'width=device-width' }
   ]
 })
-
 
 function backToTop() {
   const scrollHandler = () => {
@@ -61,12 +61,12 @@ function backToTop() {
       <nav class="d-flex justify-content-between my-5" aria-label="Navigation par page">
         <div>
           <NuxtLink v-if="prevPage" :to="prevPage.path" class="btn btn-outline-success">
-            &larr; {{ prevPage.name }}
+            &larr; Prédédent
           </NuxtLink>
         </div>
         <div>
           <NuxtLink v-if="nextPage" :to="nextPage.path" class="btn btn-outline-success">
-            {{ nextPage.name }} &rarr;
+            Suivant &rarr;
           </NuxtLink>
         </div>
       </nav>

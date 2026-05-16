@@ -20,8 +20,11 @@ const isCurrent = (path) => (route.path === path ? "page" : undefined)
     style="min-width:0;"
   >
     <div class="title">
-      That's Me !
-      | <small>Nuxt V1.0</small>
+      <span aria-hidden="true">That's Me !</span>
+      <span class="visually-hidden">
+          DatsMi!, votre expert en développement web,
+      </span>
+      | <small>Mis à jour 15-05-2026</small>
     </div>
   </div>
 
@@ -30,12 +33,7 @@ const isCurrent = (path) => (route.path === path ? "page" : undefined)
     style="min-width:0;"
   >
     <nav>
-      <a
-        href="/accessibility"
-       :aria-current="isCurrent('/accessibility')"
-      >
-        Déclaration d'accessibilité
-      </a>
+      <NuxtLink to="/accessibility" class="nav-link" :aria-current="isCurrent('/accessibility')">Déclaration d'accessibilité</NuxtLink>
     </nav>
   </div>
 </div>

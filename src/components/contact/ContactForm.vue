@@ -73,10 +73,10 @@ async function submitForm(e: Event) {
   </div>
 
   <div
-    class="row g-5 justify-content-md-between"
+    class="row g-5"
     v-if="!serverError && !success"
   >
-    <div class="col-12 col-md-5">
+    <div class="col-12 col-md-6 col-lg-4">
       <form @submit="submitForm">
         <div>
           <label for="name" class="form-label">Nom :</label>
@@ -125,7 +125,7 @@ async function submitForm(e: Event) {
         </div>
 
         <div
-          class="alert alert-warning mt-3"
+          class="alert alert-warning mt-3 visually-hidden"
           role="alert"
           aria-live="assertive"
           v-if="submitted && !isValid"
@@ -145,7 +145,7 @@ async function submitForm(e: Event) {
       </form>
     </div>
 
-    <div class="col-12 col-md-4 alert alert-success">
+    <div class="col-12 col-md-4 alert alert-success ml-2 mr-2">
       <h2>Informations légales</h2>
       <div>Michel AUCLERT – Consultant web indépendant</div>
       <div>Perpignan (France)</div>
