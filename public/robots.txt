@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+<<<<<<< HEAD
 Sitemap: https://thatsme.freeboxos.fr/sitemap.xml
+=======
+Sitemap: https://thatsme.freeboxos.fr/sitemap.xml
+>>>>>>> favicons et deployment script

@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
   "name": "Thats' Me !",
   "short_name": "Datsmi",
+=======
+  "name": "MyWebSite",
+  "short_name": "MySite",
+>>>>>>> favicons et deployment script
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
