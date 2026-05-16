@@ -24,7 +24,7 @@ const isCurrent = (path) => (route.path === path ? "page" : undefined)
       <span class="visually-hidden">
           DatsMi!, votre expert en développement web,
       </span>
-      | <small>Mis à jour 15-05-2026</small>
+      | <small>Mis à jour 16-05-2026</small>
     </div>
   </div>
 

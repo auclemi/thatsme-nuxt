@@ -2,7 +2,6 @@ import { defineEventHandler, readBody, createError } from 'h3'
 import nodemailer from 'nodemailer'
 
 export default defineEventHandler(async (event) => {
-  console.log("SMTP_HOST =", process.env.SMTP_HOST)
   const body = await readBody<{
     name?: string
     email?: string

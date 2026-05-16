@@ -9,3 +9,7 @@ useHead({
     <NuxtPage />
   </NuxtLayout>
 </template>
+<style>
+/* required to prevent Vite/Sass module merging bug */
+</style>
+
