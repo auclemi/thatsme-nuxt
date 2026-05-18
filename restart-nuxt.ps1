@@ -35,17 +35,21 @@ try {
   
     # 3. Gestion PM2 avec injection de l'environnement
     if (Get-Command pm2 -ErrorAction SilentlyContinue) {
-        Write-Log "Mise à jour du processus PM2..."
-        $ProdEntry = Join-Path $DestOutput "server/index.mjs"
-        
-        # On supprime l'ancien processus pour s'assurer que les nouveaux paramètres sont pris en compte
-        & pm2 delete $AppName 2>$null
-        
-        # Lancement avec injection explicite du fichier .env.production
+    Write-Log "Mise à jour du processus PM2..."
+    $ProdEntry = Join-Path $DestOutput "server/index.mjs"
+    
+    # On utilise "restart" qui sait gérer l'absence du processus grâce à "start" en repli
+    # L'argument --update-env force PM2 à recharger le nouveau fichier .env.production
+    try {
+        & pm2 restart $AppName --update-env --node-args="--env-file=$DestEnv" *>$null
+    } catch {
+        # Si le restart échoue (parce que c'est le premier lancement après reboot), on fait un start direct
+        Write-Log "Processus non trouvé ou arrêté. Lancement initial..."
         & pm2 start $ProdEntry --name $AppName --node-args="--env-file=$DestEnv"
-        
-        & pm2 save
-        Write-Log "Application redémarrée avec PM2."
+    }
+    
+    & pm2 save
+    Write-Log "Application redémarrée avec PM2."
     } else {
         Write-Log "PM2 non détecté. Le déploiement est terminé."
     }

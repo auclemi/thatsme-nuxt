@@ -49,7 +49,28 @@ try {
         Write-Log "ATTENTION : Fichier $EnvFileName introuvable à la racine du projet."
     }
 
-    # 5. Vidage et déploiement du dossier .output
+    # 5. Gestion PM2 : On arrête/supprime l'ancien processus AVANT de toucher aux fichiers de production
+    if (Get-Command pm2 -ErrorAction SilentlyContinue) {
+        Write-Log "Arrêt et nettoyage du processus PM2..."
+        
+        # Récupération du JSON brut de PM2
+        $rawJson = & pm2 jlist
+        
+        # On nettoie les doublons de variables Windows qui font planter PowerShell
+        $cleanJson = $rawJson -replace '"username"\s*:\s*"[^"\\]*(?:\\.[^"\\]*)*"\s*,?', '' `
+                             -replace '"USERNAME"\s*:\s*"[^"\\]*(?:\\.[^"\\]*)*"\s*,?', ''
+
+        # Maintenant la conversion se fera sans erreur
+        $pm2Status = $cleanJson | ConvertFrom-Json
+        $processExists = $pm2Status | Where-Object { $_.name -eq $AppName }
+
+        if ($processExists) {
+            Write-Log "Ancien processus détecté. Suppression de $AppName..."
+            & pm2 delete $AppName *>$null
+        }
+    }
+
+    # 6. Vidage et déploiement du dossier .output (Sécurisé, aucun fichier n'est verrouillé ou utilisé)
     if (Test-Path $DestOutput) {
         Write-Log "Vidage du dossier .output de production..."
         Get-ChildItem -Path $DestOutput | Remove-Item -Recurse -Force
@@ -60,17 +81,11 @@ try {
     Write-Log "Copie du build vers $DestOutput..."
     Copy-Item -Path "$SourceBuildFolder\*" -Destination $DestOutput -Recurse -Force
 
-    # 6. Gestion PM2 avec injection de l'environnement
+    # 7. Relance de PM2 avec les nouveaux fichiers
     if (Get-Command pm2 -ErrorAction SilentlyContinue) {
-        Write-Log "Mise à jour du processus PM2..."
+        Write-Log "Lancement de la nouvelle version avec PM2..."
         $ProdEntry = Join-Path $DestOutput "server/index.mjs"
-        
-        # On supprime l'ancien processus pour s'assurer que les nouveaux paramètres sont pris en compte
-        & pm2 delete $AppName 2>$null
-        
-        # Lancement avec injection explicite du fichier .env.production
         & pm2 start $ProdEntry --name $AppName --node-args="--env-file=$DestEnv"
-        
         & pm2 save
         Write-Log "Application redémarrée avec PM2."
     } else {
